@@ -4,6 +4,8 @@ body{
 }
 input{
   height: 40px;
+  border-radius: 15px;
+  text-align:center;
 }
 
 
@@ -16,6 +18,11 @@ input{
   text-decoration: line-through;
 }
 
+
+:focus {outline:none;border:1px solid red
+}
+
+
 .form-group{
 }
 
@@ -26,19 +33,20 @@ input{
 
 .date-display{
   color: orange;
+  font-size: .5em;
 }
 .my-list{
-  color: white;
-  font-size: 2em;
+  color: silver;
+  font-size: 1.5em;
   padding-left: 0px;
 }
 .my-list li{
     border-radius: 15px;
     border:1px solid black;
     list-style: none;
-    background-color: silver;
+    background-color: white;
     margin-top: 5px;
-    padding: 5px;
+    padding: 10px;
 }
 
 .taskInput{

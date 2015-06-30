@@ -6,6 +6,7 @@ $body = $("body");
   var $newItem = $("#newItem");
   var $submit = $("#submit");
   var $listParent = $("#list");
+  var $formBox = $("#formBox");
   var $dateInput = $("#myDate");
   var listOfTask = [
         {title: "clean room",
@@ -45,7 +46,9 @@ $body = $("body");
   var addToList = function(){
     event.preventDefault();
     console.log("I was clicked");
-    if($newItem.val() != "" && $newItemTitle.val() != ""){ 
+    if($newItem.val() != "" && 
+       $newItemTitle.val() != "" &&
+       $dateInput.val() != ""){ 
       var $listItem = $("<li></li>");
       var tempTask = "<span class='miniHeader'>Title: " + $newItemTitle.val() + "</span>";
           tempTask += "<br />";
@@ -102,7 +105,9 @@ $body = $("body");
     $(this).addClass("completed");
   }
 
-  $submit.on("click", addToList);
+  //$submit.on("submit", addToList);
+  $formBox.on("submit", addToList);
+
   $listParent.on("click", "li", removeListItem);
   displayTasks(listOfTask, $listParent);
     
