@@ -19,7 +19,9 @@ input{
 }
 
 
-:focus {outline:none;border:1px solid red
+:focus {
+  outline:none;border:1px solid red;
+  background-color: #FFFFA9;
 }
 
 
