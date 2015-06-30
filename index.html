@@ -12,18 +12,34 @@
       <h1 class="text-center">ToDo</h1>
       <form id="formBox">
         <div class="form-group input-group-lg">
-          <label>Title:</label>
-          <input id="newItemTitle" class="titleInput" type="text" placeholder="enter title" autofocus>
-          <lable>Task:</lable><input id="newItem" class="taskInput" type="text" placeholder="enter task" >
-          <lable>Due Date:</lable><input id="myDate" class="dateInput" type="date" placeholder="pick date" >
-
+        <div class="row">
+          <div>
+          <label class="col-xs-3 col-md-2">Title:</label>
+          <input id="newItemTitle" class="titleInput col-xs-3 col-md-4" type="text" placeholder="enter title" autofocus>
+          </div>
+        </div>
+        <div class="row">
+          <div class="">
+          <lable class="col-xs-3 col-md-2">Task:</lable><input id="newItem" class="taskInput col-xs-7 col-md-4" type="text" placeholder="enter task" >
+          </div>
+        </div>
+        <div class="row">
+          <div class="">  
+            <lable class="col-xs-3 col-md-2">Due Date:</lable><input id="myDate" class="dateInput col-xs-7 col-md-4" type="date" placeholder="pick date" >
+          </div>
+        </div>
+        <div class="row">  
+          <div class="col-xs-8 col-xs-offset-3 col-md-6">
             <input id="submit" class="btn btn-lg" type="submit">
-          <ul id="list" class="my-list">
-          </ul>
+          </div>
+          </div>
+            <ul id="list" class="my-list">
+            </ul>
+  
           </div>
       </form>
-
-
+      </div>
+      </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
   <script src="scripts.js"></script>
