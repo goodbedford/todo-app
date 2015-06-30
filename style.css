@@ -2,17 +2,30 @@
 body{
   background-color: aqua;
 }
+input{
+  height: 40px;
+}
 
+
+.btn{
+  margin-top: 10px;
+  border:1px solid black;
+}
 .completed{
   color: brown;
   text-decoration: line-through;
 }
+
 .form-group{
 }
 
 .miniHeader{
   color: black;
   height: 3em;
+}
+
+.date-display{
+  color: orange;
 }
 .my-list{
   color: white;
@@ -29,15 +42,11 @@ body{
 }
 
 .taskInput{
-  width: 300px;
-}
-.titleInput{
   width: 200px;
 }
-
-
-.btn{
-  margin-top: 10px;
-  border:1px solid black;
+.titleInput{
+  width: 150px;
 }
+
+
 
