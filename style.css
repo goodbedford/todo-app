@@ -1,0 +1,43 @@
+
+body{
+  background-color: aqua;
+}
+
+.completed{
+  color: brown;
+  text-decoration: line-through;
+}
+.form-group{
+}
+
+.miniHeader{
+  color: black;
+  height: 3em;
+}
+.my-list{
+  color: white;
+  font-size: 2em;
+  padding-left: 0px;
+}
+.my-list li{
+    border-radius: 15px;
+    border:1px solid black;
+    list-style: none;
+    background-color: silver;
+    margin-top: 5px;
+    padding: 5px;
+}
+
+.taskInput{
+  width: 300px;
+}
+.titleInput{
+  width: 200px;
+}
+
+
+.btn{
+  margin-top: 10px;
+  border:1px solid black;
+}
+
