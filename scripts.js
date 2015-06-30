@@ -51,23 +51,27 @@ $body = $("body");
           tempTask += "<br />";
           tempTask += "Task: " + $newItem.val();
           tempTask += "<br />";
-          tempTask += "<span id='dateText' class='date-display'>Date: " + $dateInput.val()  + "</span>";
+          tempTask += "<span id='dateText' class='date-display'>Date: " + dateFormater($dateInput.val() )  + "</span>";
       $listItem.html( tempTask );
       $listParent.prepend($listItem);
       $newItemTitle.val("");
       $newItem.val("");
+      $dateInput.val("");
     }
   }
   var dateFormater = function(dTxt){
     // 2023-08-23
     // new Date(2015, 9, 13)
+    console.log("this is dTxt: " + dTxt);
     var dateArr = dTxt.split("-");
     var tempDate= { month: dateArr[1],
             day: dateArr[2],
             year: dateArr[0]
           };
-    var d = new Date(tempDate.year, tempDate.month, tempDate.day);
-    return d;
+    var dStr = tempDate.month +"/"+ tempDate.day + "/"+ tempDate.year
+    //var d = new Date(tempDate.year, tempDate.month, tempDate.day);
+
+    return dStr;
   }
   var d1 = new Date();
   var d2 = new Date(2015, 6, 30);
