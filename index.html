@@ -9,7 +9,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-      <h1 class="text-center">ToDo</h1>
+      <h1 id="headerBox" class="text-center">ToDo</h1>
       <form id="formBox">
         <div class="form-group input-group-lg">
         <div class="row">
@@ -47,9 +47,7 @@
   <!-- underscore template -->
   <script type="text/template" id="list-template">
 
-       <li><span class='miniHeader'>Title:<%= title %></span><br /> 
-           <%= task %><br />
-           <span id="dateText" class="date-display">Due Date:<%= date %></span>
+       <li><span class='miniHeader'>Title:<%= title %></span><br /><%= task %><br /><span id="dateText" class="date-display">Due Date:<%= date %></span>
        </li>
 
   </script>

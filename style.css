@@ -2,12 +2,17 @@
 body{
   background-color: aqua;
 }
-input{
+input{  
   height: 40px;
   border-radius: 15px;
   text-align:center;
 }
 
+.alert-danger {
+  height: 50px;
+  margin:0;
+  font-size: 18px ;
+}
 
 .btn{
   margin-top: 10px;
@@ -18,6 +23,9 @@ input{
   text-decoration: line-through;
 }
 
+.editFormStyle{
+  font-size: 12px;
+}
 
 :focus {
   outline:none;border:1px solid red;
@@ -26,6 +34,10 @@ input{
 
 
 .form-group{
+}
+
+.hideMe{
+  display:none;
 }
 
 .miniHeader{

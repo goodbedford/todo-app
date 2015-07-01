@@ -64,13 +64,41 @@ $body = $("body");
   var addToList = function(){
     event.preventDefault();
     console.log("I was clicked");
-    var tempTodo = new ToDo($newItemTitle.val(), $newItemTitle.val(), dateFormater($dateInput.val() ) );
-    listOfTasks.push(tempTodo);
-    console.log(listOfTasks)
-    //console.log(tempTodo.title, tempTodo.task, tempTodo.date);
-    $task = $(listTemplate(tempTodo) );
-    $task.attr("data-index", index);
-    $listParent.prepend($task);
+    if($newItem.val() != "" && 
+       $newItemTitle.val() != "" &&
+       $dateInput.val() != ""){ 
+      var tempTodo = new ToDo($newItemTitle.val(), $newItem.val(), dateFormater($dateInput.val() ) );
+      listOfTasks.push(tempTodo);
+      console.log(listOfTasks)
+      //console.log(tempTodo.title, tempTodo.task, tempTodo.date);
+      $task = $(listTemplate(tempTodo) );
+      //task.attr("data-index", index);
+
+      //add li with task to parent ul
+      $listParent.prepend($task);
+      $newItemTitle.val("");
+      $newItem.val("");
+      $dateInput.val("");
+  var $linkForm = $("<form class='editFormStyle'>");
+      $editBtn = $("<input type='button' class='btn'>");
+      $editBtn.val("Edit");
+      $linkForm.append($editBtn);
+      //console.log($listParent.first() );
+      $listParent.children().first().append($linkForm);
+    }else{
+      var $alert = $("<div></div>");
+          $alert.addClass("alert alert-danger");
+      var $close = $("<a></a>");
+          $close.addClass("close");
+          $close.attr("href", "#");
+          $close.attr("data-dismiss", 'alert');
+          $close.attr("aria-label", "close");
+          $close.html("&times;");
+      $alert.html($close);
+      $alert.prepend("Please fill in all the inputs");
+
+      $("#headerBox").prepend($alert);
+    }
     // if($newItem.val() != "" && 
     //    $newItemTitle.val() != "" &&
     //    $dateInput.val() != ""){ 
@@ -115,16 +143,20 @@ $body = $("body");
 
   }
   var removeListItem = function(){
-    $listParent.children().on("click", function(){
+    //$listParent.on("click", function(){
       
-      //console.log("check index to see if deleted" + listOfTasks);
+      console.log("check index to see if deleted" + listOfTasks);
+      console.log("this is the index func: "+ $(this).index() )
+      var indx = $(this).index();
       console.log("this delete index is ",$(this).attr("data-index") );
       $(this).remove();
-      var index = $(this).attr("data-index");
-      console.log(listOfTasks[index]);
-      
+      listOfTasks.splice(indx,1);
+      console.log(listOfTasks)
+      //var index = $(this).attr("data-index");
+      //console.log(listOfTasks[index]);
 
-    });
+
+    //});
   };
 
   var markCompleted = function() {
@@ -136,7 +168,10 @@ $body = $("body");
   $formBox.on("submit", addToList);
 
   $listParent.on("click", "li", removeListItem);
-  //displayTasks(listOfTask, $listParent);
-    
+  //displayTasks(listOfTasks, $listParent);
+  $("#headerBox").on("click","a", function(){
+    console.log("my alert was clicked");
+    $(this).parent().addClass("hideMe");
+  })
 });
 
