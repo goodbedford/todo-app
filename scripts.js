@@ -31,32 +31,21 @@ $body = $("body");
   }
  
  //data model
- var task1 = new ToDo()
+ var task1 = new ToDo( "clean room", "hang clothes, sweep floor, water plants", new Date(2023, 6, 7) ),
+     task2 = new ToDo( "task2", "hang clothes, sweep floor, water plants", new Date(2015, 6, 7) ); 
+     task3 = new ToDo( "task3", "hang clothes, sweep floor, water plants", new Date(2015, 9, 13));
 
+ var listOfTasks = [ task1, task2, task3];
 
- var listOfTasks = [
-       {title: "clean room",
-        task: "hang clothes, sweep floor, water plants",
-        date: new Date(2023, 6, 7)},
-       {title: "task2",
-        task: "hang clothes, sweep floor, water plants",
-        date: new Date(2015, 6, 7)},
-       {title: "task3",
-         task: "hang clothes, sweep floor, water plants",
-         date: new Date(2015, 9, 13)},
-       {title: "task4",
-         task: "hang something something plants",
-         date: new Date(2015, 9, 7)}
- ];
-
+ //change  the date format
  for(var i =0; i < listOfTasks.length; i++){
-    console.log(" inside for loop" + listOfTasks[i].date.toLocaleDateString("en-US"));  
+    //console.log(" inside for loop" + listOfTasks[i].date.toLocaleDateString("en-US"));  
     listOfTasks[i].date = listOfTasks[i].date.toLocaleDateString("en-US");
     //console.log(listOfTasks[i].date)
  }
   _.each(listOfTasks, function(task, index){
     var $task =  $(listTemplate(task) );
-        //$task.attr("data-index", index);
+        $task.attr("data-index", index);
         $listParent.prepend($task);
   });
 
@@ -80,6 +69,7 @@ $body = $("body");
     console.log(listOfTasks)
     //console.log(tempTodo.title, tempTodo.task, tempTodo.date);
     $task = $(listTemplate(tempTodo) );
+    $task.attr("data-index", index);
     $listParent.prepend($task);
     // if($newItem.val() != "" && 
     //    $newItemTitle.val() != "" &&
@@ -105,25 +95,6 @@ $body = $("body");
   //   liParent.append($listItem);
   // }
   
-  // var addToList = function(){
-  //   event.preventDefault();
-  //   console.log("I was clicked");
-  //   if($newItem.val() != "" && 
-  //      $newItemTitle.val() != "" &&
-  //      $dateInput.val() != ""){ 
-  //     var $listItem = $("<li></li>");
-  //     var tempTask = "<span class='miniHeader'>Title: " + $newItemTitle.val() + "</span>";
-  //         tempTask += "<br />";
-  //         tempTask += "Task: " + $newItem.val();
-  //         tempTask += "<br />";
-  //         tempTask += "<span id='dateText' class='date-display'>Due Date: " + dateFormater($dateInput.val() )  + "</span>";
-  //     $listItem.html( tempTask );
-  //     $listParent.prepend($listItem);
-  //     $newItemTitle.val("");
-  //     $newItem.val("");
-  //     $dateInput.val("");
-  //   }
-  // }
 
   var d1 = new Date();
   var d2 = new Date(2015, 6, 30);
@@ -145,7 +116,14 @@ $body = $("body");
   }
   var removeListItem = function(){
     $listParent.children().on("click", function(){
-      this.remove();
+      
+      //console.log("check index to see if deleted" + listOfTasks);
+      console.log("this delete index is ",$(this).attr("data-index") );
+      $(this).remove();
+      var index = $(this).attr("data-index");
+      console.log(listOfTasks[index]);
+      
+
     });
   };
 
