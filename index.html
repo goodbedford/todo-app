@@ -35,9 +35,9 @@
         </div>
             <ul id="list" class="my-list">
             </ul>
-  
+            
         </div>    
-      </form>
+      </form
       </div>
       </div>
   </div>
@@ -47,7 +47,8 @@
   <!-- underscore template -->
   <script type="text/template" id="list-template">
 
-       <li><span class='miniHeader'>Title:<%= title %></span><br /><%= task %><br /><span id="dateText" class="date-display">Due Date:<%= date %></span>
+       <li class="lists"><span class='miniHeader'>Title:<%= title %></span><br /><%= task %><br /><span id="dateText" class="date-display">Due Date:<%= date %></span>
+       <br /><span>Expires in:<%= dateToExpire() %> Days</span>
        </li>
 
   </script>

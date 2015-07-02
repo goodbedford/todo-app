@@ -14,7 +14,23 @@ $body = $("body");
     this.title = title,
     this.task = task,
     this.date = date;
-  };
+ };
+  ToDo.all = [];
+  ToDo.prototype.dateToExpire = function() {
+      var one_day = 1000 * 60 * 60 * 24;
+      var dateDifferenceMs = this.date.getTime() - (new Date().getTime());
+      var daysDiff = dateDifferenceMs / one_day;
+      return Math.round(daysDiff);
+    }
+  ToDo.prototype.save = function(){
+    ToDo.all.push(this);
+  }
+  ToDo.prototype.render = function(){
+    var $task =  $(listTemplate(this) );
+        var index =  ToDo.all.indexOf(this);
+        $task.attr("data-index", index);
+        $listParent.prepend($task);
+  }
   var dateFormater = function(dTxt){
     // 2023-08-23
     // new Date(2015, 9, 13)
@@ -24,31 +40,46 @@ $body = $("body");
             day: dateArr[2],
             year: dateArr[0]
           };
-    var dStr = tempDate.month +"/"+ tempDate.day + "/"+ tempDate.year
-    //var d = new Date(tempDate.year, tempDate.month, tempDate.day);
-
-    return dStr;
+    //var dStr = tempDate.month +"/"+ tempDate.day + "/"+ tempDate.year
+    var d = new Date(tempDate.year, (tempDate.month - 1), tempDate.day);
+    return d;
   }
- 
+   var dateDiff = function(fromDate, toDate){
+      var one_day = 1000 * 60 * 60 * 24;
+      var dateDifferenceMs = toDate.getTime() - fromDate.getTime();
+      var daysDiff = dateDifferenceMs / one_day;
+      var tempDate = {diff:Math.round(daysDiff)}
+      //return Math.round(daysDiff);
+      return tempDate;
+    }
+  //console.log(dateDiff(d1,d2));
+
  //data model
  var task1 = new ToDo( "clean room", "hang clothes, sweep floor, water plants", new Date(2023, 6, 7) ),
      task2 = new ToDo( "task2", "hang clothes, sweep floor, water plants", new Date(2015, 6, 7) ); 
      task3 = new ToDo( "task3", "hang clothes, sweep floor, water plants", new Date(2015, 9, 13));
-
- var listOfTasks = [ task1, task2, task3];
+     task1.save();
+     task2.save();
+     task3.save();
+ //var listOfTasks = [ task1, task2, task3];
 
  //change  the date format
- for(var i =0; i < listOfTasks.length; i++){
+ //for(var i =0; i < listOfTasks.length; i++){
     //console.log(" inside for loop" + listOfTasks[i].date.toLocaleDateString("en-US"));  
-    listOfTasks[i].date = listOfTasks[i].date.toLocaleDateString("en-US");
+    // listOfTasks[i].date = listOfTasks[i].date.toLocaleDateString("en-US");
     //console.log(listOfTasks[i].date)
- }
-  _.each(listOfTasks, function(task, index){
-    var $task =  $(listTemplate(task) );
-        $task.attr("data-index", index);
-        $listParent.prepend($task);
-  });
-
+ //}
+  // _.each(listOfTasks, function(task, index){
+  //   var $task =  $(listTemplate(task) );
+  //       $task.attr("data-index", index);
+  //       $listParent.prepend($task);
+  // });
+   _.each(ToDo.all, function(task, index){
+      task.render();
+     // var $task =  $(listTemplate(task) );
+     //     $task.attr("data-index", index);
+     //     $listParent.prepend($task);
+   });
   var displayTasks = function(listOfTasks, parentUl){
     $.each(listOfTasks, function(index, item){
       var $tempLi = $("<li />");
@@ -67,24 +98,32 @@ $body = $("body");
     if($newItem.val() != "" && 
        $newItemTitle.val() != "" &&
        $dateInput.val() != ""){ 
+      console.log("the date is :", $dateInput.val() );
+      //var tempTodo = new ToDo($newItemTitle.val(), $newItem.val(), $dateInput.val() );
       var tempTodo = new ToDo($newItemTitle.val(), $newItem.val(), dateFormater($dateInput.val() ) );
-      listOfTasks.push(tempTodo);
-      console.log(listOfTasks)
+      //ToDo.all.push(tempTodo);
+      tempTodo.save();
+      tempTodo.render();
+      console.log(ToDo.all)
+
       //console.log(tempTodo.title, tempTodo.task, tempTodo.date);
-      $task = $(listTemplate(tempTodo) );
-      //task.attr("data-index", index);
+      //var index = listOfTasks.indexOf(this);
+      //$task = $(listTemplate(tempTodo) );
+      //$task.attr("data-index", index);
 
       //add li with task to parent ul
-      $listParent.prepend($task);
-      $newItemTitle.val("");
-      $newItem.val("");
-      $dateInput.val("");
-  var $linkForm = $("<form class='editFormStyle'>");
-      $editBtn = $("<input type='button' class='btn'>");
-      $editBtn.val("Edit");
-      $linkForm.append($editBtn);
-      //console.log($listParent.first() );
-      $listParent.children().first().append($linkForm);
+      //$listParent.prepend($task);
+      $formBox[0].reset();
+      $newItem.focus();
+      // $newItemTitle.val("");
+      // $newItem.val("");
+      // $dateInput.val("");
+  // var $linkForm = $("<form class='editFormStyle'>");
+  //     $editBtn = $("<input type='button' class='btn'>");
+  //     $editBtn.val("Edit");
+  //     $linkForm.append($editBtn);
+  //     //console.log($listParent.first() );
+  //     $listParent.children().first().append($linkForm);
     }else{
       var $alert = $("<div></div>");
           $alert.addClass("alert alert-danger");
@@ -115,26 +154,7 @@ $body = $("body");
     //   $dateInput.val("");
     //}
   }
-  // var addToList = function(evt,liParent, item){
-  //   evt.preventDefault();
-  //   console.log("I was clicked");
-  //   var $listItem = $("<li></li>");
-  //   $listItem.val( item.val() );
-  //   liParent.append($listItem);
-  // }
-  
-
-  var d1 = new Date();
-  var d2 = new Date(2015, 6, 30);
-  var one_day = 1000 * 60 * 60 * 24;
-
-   var dateDiff = function(fromDate, toDate){
-      var dateDifferenceMs = toDate.getTime() - fromDate.getTime();
-      var daysDiff = dateDifferenceMs / one_day;
-      return Math.round(daysDiff);
-    }
-  //console.log(dateDiff(d1,d2));
-
+ 
   var taskDueAlert = function(d1,d2, dFunc){
     var daysToAlert = dFunc(d1,d2);
     if (daysToAlert < 3){
@@ -145,18 +165,20 @@ $body = $("body");
   var removeListItem = function(){
     //$listParent.on("click", function(){
       
-      console.log("check index to see if deleted" + listOfTasks);
-      console.log("this is the index func: "+ $(this).index() )
-      var indx = $(this).index();
-      console.log("this delete index is ",$(this).attr("data-index") );
+      //console.log("check index to see if deleted" + listOfTasks);
+      //console.log("this delete index is ",$(this).attr("data-index") );
       $(this).remove();
-      listOfTasks.splice(indx,1);
-      console.log(listOfTasks)
+      var indx = $(this).attr("data-index");
+      ToDo.all.splice(indx,1);
+      console.log(ToDo.all)
+      $('.lists').each(function(index) {
+        $(this).attr('data-index', index);
+      });
+
       //var index = $(this).attr("data-index");
       //console.log(listOfTasks[index]);
 
-
-    //});
+      //});
   };
 
   var markCompleted = function() {
