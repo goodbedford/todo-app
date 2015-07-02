@@ -27,6 +27,9 @@ input{
   font-size: 12px;
 }
 
+.expires{
+  font-size:10px;
+}
 :focus {
   outline:none;border:1px solid red;
   background-color: #FFFFA9;
