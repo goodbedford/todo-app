@@ -2,12 +2,50 @@
 body{
   background-color: aqua;
 }
+div.col-xs-offset-2.col-xs-9.col-md-10{
+  padding-right: 0px;
+  padding-left: 0px;
+}
+h1{
+  color: blue;
+  background-color: silver;
+  padding-top: 10px;
+  padding-bottom: 8px;
+  border-radius: 15px;
+  border:1px solid blue;
+}
 input{  
   height: 40px;
   border-radius: 15px;
   text-align:center;
+  margin-top: 5px;
+  border:none;
+  border-left: 15px solid blue;
+  color:blue;
 }
 
+input::-webkit-input-placeholder {
+  color: blue;
+}
+input::-moz-placeholder {
+  color: blue;
+}
+input:-moz-placeholder {   /* Older versions of Firefox */
+  color: blue;
+}
+input:-ms-input-placeholder { 
+  color: blue;
+}
+
+label.col-xs-2.col-md-2{
+  float:left;
+  text-align: right;
+  padding-top: 15px;
+}
+
+
+.label{  
+}
 .alert-danger {
   height: 50px;
   margin:0;
@@ -22,17 +60,24 @@ input{
   color: brown;
   text-decoration: line-through;
 }
+.date-display{
+  color: orange;
+  font-size: .5em;
+}
 
 .editFormStyle{
   font-size: 12px;
 }
 
+.expired{
+  color: red;
+}
 .expires{
-  font-size:10px;
+  font-size: 0.5em;
 }
 :focus {
-  outline:none;border:1px solid red;
-  background-color: #FFFFA9;
+  outline:none;border:2px solid blue;
+  background-color: white  ;
 }
 
 
@@ -42,36 +87,45 @@ input{
 .hideMe{
   display:none;
 }
+input#myDate{
+  padding-left: 70px;
+}
 
 .miniHeader{
   color: black;
   height: 3em;
 }
-
-.date-display{
-  color: orange;
-  font-size: .5em;
+.mobileWidth{
+  min-width: 320px;
 }
 .my-list{
-  color: silver;
-  font-size: 1.5em;
+  color: blue;
+  font-size: 1em;
   padding-left: 0px;
 }
 .my-list li{
     border-radius: 15px;
-    border:1px solid black;
+    /*border:1px solid blue;*/
+    border-left: 15px solid blue;
     list-style: none;
     background-color: white;
     margin-top: 5px;
     padding: 10px;
 }
-
+#submit{
+  margin-top: 0px;
+  color: white;
+  background-color: grey;
+}
+#submit:hover{
+  background-color: red;
+}
 .taskInput{
-  width: 200px;
 }
 .titleInput{
-  width: 150px;
 }
 
+.topStyle{
+}
 
 

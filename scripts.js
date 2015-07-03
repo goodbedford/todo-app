@@ -21,14 +21,17 @@ $body = $("body");
       var one_day = 1000 * 60 * 60 * 24;
       var dateDifferenceMs = this.date.getTime() - (new Date().getTime());
       var daysDiff = dateDifferenceMs / one_day;
-      this.expireDate = Math.round(daysDiff);
+      daysDiff = Math.round(daysDiff);
+      if( daysDiff == 0){
+        daysDiff = 1;
+      }
+      this.expireDate = daysDiff;
     }
   ToDo.prototype.save = function(){
     ToDo.all.push(this);
   }
   ToDo.prototype.render = function(){
     var $task =  $(listTemplate(this) );
-
         var index =  ToDo.all.indexOf(this);
         $task.attr("data-index", index);
         $listParent.prepend($task);
@@ -54,10 +57,18 @@ $body = $("body");
       //return Math.round(daysDiff);
       return tempDate;
     }
+  var taskDueAlert = function(obj){
+    if (obj.expireDate <= 3){
+      //add class to change color
+      obj.addClass("expired");
 
+    }else{
+      console.log("date not less than 3 days.")
+    }
+  }
  //data model
  var task1 = new ToDo( "clean room", "hang clothes, sweep floor, water plants", new Date(2023, 6, 7) ),
-     task2 = new ToDo( "task2", "hang clothes, sweep floor, water plants", new Date(2015, 6, 7) ); 
+     task2 = new ToDo( "task2", "hang clothes, sweep floor, water plants", new Date(2015, 6, 2) ); 
      task3 = new ToDo( "task3", "hang clothes, sweep floor, water plants", new Date(2015, 9, 13));
      task1.save();
      task2.save();
@@ -67,7 +78,9 @@ $body = $("body");
       task.dateToExpire();
       task.date = task.date.toLocaleDateString();
       task.render();
-     $listParent.prepend($task);
+      //taskDueAlert(task);
+
+
    });
   var displayTasks = function(listOfTasks, parentUl){
     $.each(listOfTasks, function(index, item){
@@ -81,6 +94,7 @@ $body = $("body");
         parentUl.prepend($tempLi);
     });
   }
+
   var addToList = function(){
     event.preventDefault();
     console.log("I was clicked");
@@ -113,13 +127,7 @@ $body = $("body");
 
       $("#headerBox").prepend($alert);
     }
-  }
- 
-  var taskDueAlert = function(d1,d2, dFunc){
-    var daysToAlert = dFunc(d1,d2);
-    if (daysToAlert < 3){
-      //add class to change color
-    }
+  
 
   }
   var removeListItem = function(){
@@ -150,6 +158,6 @@ $body = $("body");
   $("#headerBox").on("click","a", function(){
     console.log("my alert was clicked");
     $(this).parent().addClass("hideMe");
-  })
+  });
 });
 

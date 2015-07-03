@@ -6,40 +6,40 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
+  <div class="container mobileWidth">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-      <h1 id="headerBox" class="text-center">ToDo</h1>
-      <form id="formBox">
-        <div class="form-group input-group-lg">
-        <div class="row">
-          <div>
-          <label class="col-xs-3 col-md-2">Title: </label>
-          <input id="newItemTitle" class="titleInput col-xs-3 col-md-4" type="text" placeholder="enter title" autofocus>
-          </div>
+          <form id="formBox">
+            <div class="form-group input-group-lg">
+              <div class="row">
+                <div class="col-xs-9 col-xs-offset-2">
+                  <h1 id="headerBox" class="text-center">TO-DO
+                  <input id="submit" class="btn btn-lg" type="submit"></h1>
+                </div>
+              </div>
+              <div class="topStyle">
+              <div class="row">
+                <label class="col-xs-2 col-md-2"></label>
+                <input id="newItemTitle" class="titleInput col-xs-9 col-md-10" type="text" placeholder="enter title" autofocus>
+              </div>
+              <div class="row">
+                <label class="col-xs-2 col-md-2"></label><input id="newItem" class="taskInput col-xs-9 col-md-10" type="text" placeholder="enter task" >
+              </div>
+              <div class="row">
+                <label class="col-xs-2 col-md-2"></label><input id="myDate" class="dateInput col-xs-9 col-md-10" type="date" placeholder="pick date" >
+              </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-offset-2 col-xs-9 col-md-10">
+                  <ul id="list" class="my-list">
+                  </ul>
+                </div>
+              </div>   
+              </div>        
+          </form>
         </div>
-        <div class="row">
-          <div class="">
-          <lable class="col-xs-3 col-md-2">Task: </lable><input id="newItem" class="taskInput col-xs-7 col-md-4" type="text" placeholder="enter task" >
-          </div>
-        </div>
-        <div class="row">
-          <div class="">  
-            <lable class="col-xs-3 col-md-2">Due Date: </lable><input id="myDate" class="dateInput col-xs-7 col-md-4" type="date" placeholder="pick date" >
-          </div>
-        </div>
-        <div class="row">  
-          <div class="col-xs-8 col-xs-offset-3 col-md-6">
-            <input id="submit" class="btn btn-lg" type="submit">
-          </div>
-        </div>
-            <ul id="list" class="my-list">
-            </ul>
-            
-        </div>    
-      </form
       </div>
-      </div>
+    </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
@@ -47,8 +47,8 @@
   <!-- underscore template -->
   <script type="text/template" id="list-template">
 
-       <li class="lists"><span class='miniHeader'>Title: <%= title %></span><br /><%= task %><br /><span id="dateText" class="date-display">Due Date: <%= date %></span>
-       <br /><span class="expires">Expires in: <%= expireDate %> Days</span>
+       <li class="lists"><span class='miniHeader'>Title: <%= title %></span><br /><%= task %><br /><span id="dateText" class="date-display">Due Date: <%= date %></span><br />
+       <span class="expires">Expires in: <%= expireDate %> Days</span>
        </li>
 
   </script>
